@@ -3,29 +3,30 @@ import Kafka from 'node-rdkafka';
 import eventType from '../eventType.js';
 
 const stream = Kafka.Producer.createWriteStream({
-    'metadata.broker.list': 'localhost:9093' 
+    'metadata.broker.list': '192.168.6.51:9093' 
 }, {}, { topic: 'restapi' });
 
-function getRandomAnimal() {
-    const categories = [ 'CAT', 'DOG' ];
-    return categories[Math.floor(Math.random() * categories.length)];
-}
+// function getRandomAnimal() {
+//     const categories = [ 'CAT', 'DOG' ];
+//     return categories[Math.floor(Math.random() * categories.length)];
+// }
 
-function getRandomNoise(animal) {
-    if (animal === 'CAT') {
-        const noises = [ 'purr', 'meow' ];
-        return noises[Math.floor(Math.random() * noises.length)];
-    } else if (animal === 'DOG') {
-        const noises = [ 'woof', 'bark!' ];
-        return noises[Math.floor(Math.random() * noises.length)];
-    }
-}
+// function getRandomNoise(animal) {
+//     if (animal === 'CAT') {
+//         const noises = [ 'purr', 'meow' ];
+//         return noises[Math.floor(Math.random() * noises.length)];
+//     } else if (animal === 'DOG') {
+//         const noises = [ 'woof', 'bark!' ];
+//         return noises[Math.floor(Math.random() * noises.length)];
+//     }
+// }
 
 function queueMessage() {
-    const category = getRandomAnimal();
-    const noise = getRandomNoise(category);
-    const event = { category, noise };
-    const success = stream.write(eventType.toBuffer(event));
+    // const category = getRandomAnimal();
+    // const noise = getRandomNoise(category);
+    // const event = { category, noise };
+    const roomName = '123'
+    const success = stream.write(eventType.toBuffer({ roomName }));
     if (success) {
         console.log('message wrote successfully to stream');
     } else {
