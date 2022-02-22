@@ -3,7 +3,7 @@ import Kafka from 'node-rdkafka';
 import eventType from '../eventType.js';
 
 const stream = Kafka.Producer.createWriteStream({
-    'metadata.broker.list': '192.168.6.51:9093' 
+    'metadata.broker.list': 'localhost:9092' 
 }, {}, { topic: 'restapi' });
 
 // function getRandomAnimal() {
